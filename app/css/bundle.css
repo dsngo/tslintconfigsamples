@@ -1,0 +1,407 @@
+@charset "UTF-8";
+/*
+レイアウト用
+*/
+.nomargin {
+  margin: 0 0; }
+
+.notopmargin {
+  margin-top: 0; }
+
+.nobottommargin {
+  margin-bottom: 0; }
+
+.nopadding {
+  padding: 0 0; }
+
+.width100 {
+  width: 100%; }
+
+.height100,
+.height100 md-tab-content > div {
+  height: 100%;
+  box-sizing: border-box; }
+
+.offset {
+  margin-left: 1em; }
+
+.offset.line {
+  border-left: solid 2px #f0f0f0; }
+
+.padding-all {
+  padding: 0.5em; }
+
+.block {
+  display: block; }
+
+/*animation*/
+.animated {
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease; }
+
+.animated.ng-enter {
+  opacity: 0; }
+
+.animated.ng-enter.ng-enter-active {
+  opacity: 1; }
+
+.animated.ng-leave {
+  opacity: 1; }
+
+.animated.ng-leave.ng-leave-active {
+  opacity: 0; }
+
+.animated.ng-move {
+  opacity: .5; }
+
+.animated.ng-move.ng-move-active {
+  opacity: 1; }
+
+.height64.animated {
+  overflow: hidden; }
+
+.height64.animated.ng-enter,
+.height64.animated.ng-leave.ng-leave-active {
+  height: 0;
+  max-height: 0;
+  min-height: 0; }
+
+.height64.animated.ng-enter.ng-enter-active,
+.height64.animated.ng-leave {
+  height: 64px;
+  max-height: 64px;
+  min-height: 64px; }
+
+/*
+textareaのマージン無し版
+*/
+md-input-container.nomargin {
+  margin-top: 18px;
+  margin-bottom: 0px; }
+
+md-input-container.nomargin .md-errors-spacer {
+  min-height: 0px; }
+
+md-input-container.nomargin.no-label {
+  margin-top: 0; }
+
+/*
+md-grid-tile
+*/
+md-grid-tile.image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  /*background-attachment: fixed;*/
+  background-size: auto 100%;
+  background-color: #464646; }
+
+md-dialog.md-dialog-fullscreen {
+  max-width: 100%;
+  max-height: 100%; }
+
+/*
+username
+*/
+.username {
+  margin: 0 0; }
+
+.username > span:first-child {
+  font-weight: bolder; }
+
+.username > span {
+  color: gray; }
+
+/*
+arrow-box
+*/
+.arrow-box {
+  position: relative;
+  padding: 0.5em 0.5em;
+  border-radius: 4px;
+  border: none; }
+
+.arrow-box:after {
+  top: 12px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: transparent;
+  border-width: 8px;
+  margin-top: -8px; }
+
+.arrow-box.left:after {
+  right: 100%;
+  border-right-color: inherit; }
+
+.arrow-box.right:after {
+  left: 100%;
+  border-left-color: inherit; }
+
+.overlay-base {
+  position: relative; }
+
+.overlay {
+  position: absolute;
+  z-index: 1;
+  /*opacity: 0.75;*/
+  top: -0.5em;
+  right: 0;
+  margin: auto;
+  -webkit-transition: all ease 0.4s;
+  -moz-transition: all ease 0.4s;
+  -o-transition: all ease 0.4s;
+  transition: all ease 0.4s; }
+
+.overlay.bottom {
+  top: auto;
+  bottom: -0.5em; }
+@charset "UTF-8";
+/*
+Quill.js用css
+*/
+[ng-quill-editor] {
+  display: block; }
+
+.ql-out-bottom {
+  visibility: initial !important; }
+.v-accordion-arrow v-pane > v-pane-header::after {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+  content: 'expand_more';
+  position: absolute;
+  right: 8px;
+  top: calc(50% - 24px/2);
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  -o-transition: all ease 0.5s;
+  transition: all ease 0.5s; }
+
+.v-accordion-arrow v-pane.is-expanded > v-pane-header::after {
+  -webkit-transform: rotate(-180deg);
+  transform: rotate(-180deg); }
+label {
+  margin: 0;
+  padding: 0;
+  display: inline-block; }
+
+select,
+input[type="text"] {
+  height: 30px; }
+
+p {
+  margin: 0;
+  color: #6e6e6e;
+  font-size: 16px; }
+  @media only screen and (max-width: 699px) and (orientation: portrait) {
+    p {
+      font-size: 12px; } }
+  @media only screen and (max-width: 699px) and (orientation: landscape) {
+    p {
+      font-size: 12px; } }
+
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 0; }
+
+button, select {
+  cursor: pointer; }
+
+* {
+  outline: none; }
+
+select {
+  border: 0;
+  /*Removes border*/
+  appearance: none;
+  -webkit-appearance: none;
+  /*Removes default chrome and safari style*/
+  -moz-appearance: none;
+  /*Removes default style Firefox*/
+  -o-appearance: none;
+  /*Remove defautl style pre-webkit Opera*/
+  -ms-appearance: none;
+  /*Remove defautl style of Ms browser*/
+  background-color: transparent;
+  border: 1px solid #dddddd;
+  color: #6e6e6e;
+  padding-left: 5px;
+  background: url("/app/images/dropdown-arrow.png");
+  background-position: right center;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  cursor: pointer; }
+
+select::-ms-expand {
+  display: none; }
+
+input::-webkit-calendar-picker-indicator {
+  background-color: inherit; }
+
+input[type=number] {
+  -moz-appearance: textfield; }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */ }
+
+input[type=range] {
+  -webkit-appearance: none;
+  cursor: pointer; }
+
+input[type=range]:focus {
+  outline: none; }
+
+input[type=range]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  background-color: #e0e0e0;
+  height: 3px; }
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background-color: #106cc8;
+  box-shadow: 0px 5px 10px -2px rgba(135, 135, 135, 0.5);
+  cursor: pointer; }
+
+input[type=range]::-moz-range-track {
+  -webkit-appearance: none;
+  background-color: #e0e0e0;
+  height: 3px; }
+
+input[type=range]::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background-color: #106cc8;
+  box-shadow: 0px 5px 10px -2px rgba(135, 135, 135, 0.5);
+  cursor: pointer; }
+
+input[type=range]::-ms-track {
+  -webkit-appearance: none;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+  border-width: 5px 0;
+  height: 3px; }
+
+input[type=range]::-ms-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px 0px #106cc8;
+  cursor: pointer; }
+
+input[type=range]::-ms-fill-lower {
+  background: #e0e0e0;
+  border-radius: 10px; }
+
+input[type=range]::-ms-fill-upper {
+  background: #e0e0e0;
+  border-radius: 10px; }
+
+input[type=number] {
+  width: 100%; }
+
+div[data-tooltip] {
+  position: relative;
+  z-index: 2; }
+
+div[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  background-color: #106cc8;
+  color: #fff;
+  display: block;
+  font-size: 13px;
+  padding: 5px;
+  border-radius: 5px;
+  white-space: nowrap;
+  text-decoration: none;
+  visibility: hidden;
+  opacity: 0; }
+
+div[data-tooltip]:hover::before {
+  display: block;
+  visibility: visible;
+  opacity: 0.85;
+  animation: autoHide 0.5s linear forwards;
+  animation-delay: 1.5s; }
+
+@keyframes autoHide {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    display: none; } }
+
+/** positioning **/
+div[data-tooltip][data-placement="left"]::before {
+  top: 20%;
+  right: 100%;
+  margin-right: 10px; }
+
+.desktop-only {
+  display: flex; }
+
+.mobile-only {
+  display: none; }
+
+.mobile-land-only {
+  display: none; }
+
+.hide {
+  display: none; }
+
+.show {
+  display: block; }
+
+.bolded {
+  background-color: #106cc8;
+  color: white; }
+
+.unBoled {
+  background-color: rgba(255, 0, 255, 0);
+  color: #106cc8; }
+
+.mobile-land-size {
+  width: 100%;
+  height: auto;
+  align-self: flex-end; }
+
+@media only screen and (max-width: 699px) and (orientation: landscape) {
+  .break-word {
+    display: block; } }
+
+/*# sourceMappingURL=bundle.css.map*/

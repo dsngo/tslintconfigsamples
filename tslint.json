@@ -1,0 +1,7 @@
+{
+    "extends": "tslint-config-airbnb",
+    "rules": {
+        "quotemark": [true, "double", "jsx-double", "avoid-template"],
+        "ter-indent": [{ "SwitchCase": true }, true, 4]
+    }
+}

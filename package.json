@@ -1,0 +1,34 @@
+{
+  "name": "typescripttest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Daniel <daniel.dungngo@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "prewd": "rm -rf app",
+    "wd": "webpack --progress --color --env",
+    "prewp": "rm -rf dist",
+    "wp": "webpack -p --progress --color --env.prod",
+    "dev": "webpack-dev-server --progress --color --env",
+    "start": "lite-server",
+    "lint": "tslint src/**/**.ts"
+  },
+  "dependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.2.3",
+    "css-loader": "^0.28.5",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.5.3",
+    "optimize-css-assets-webpack-plugin": "^3.1.1",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "tslint": "^5.6.0",
+    "tslint-config-airbnb": "^5.2.1",
+    "typescript": "^2.4.2",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
