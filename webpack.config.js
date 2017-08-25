@@ -1,117 +1,121 @@
-const { join } = require('path');
-const webpack = require('webpack');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { join } = require("path");
+const webpack = require("webpack");
+const nodeExternals = require("webpack-node-externals");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+// Initial configurations
+const pageTitle = "TypeScript";
+const sourceDir = join(__dirname, "src");
+const developmentDir = join(__dirname, "app");
+const productionDir = join(__dirname, "dist");
+const developmentPort = 9000;
+const devtool = defineDevtool(3);
+const stats = 1 ? { assets: true } : { colors: true, reasons: true };
+const extensions = [".ts", ".scss", ".js", ".json"];
+const devSassLoader = ExtractTextPlugin.extract({
+    fallback: "style-loader",
+    use: [
+        {
+            loader: "css-loader",
+            options: { sourceMap: true, importLoaders: 1 },
+        },
+        "sass-loader",
+    ],
+});
 
 function defineDevtool(num) {
-  switch (num) {
-    case 1:
-      return 'eval';
-    case 2:
-      return 'cheap-module-eval-source-map';
-    default:
-      return 'source-map';
-  }
+    switch (num) {
+        case 1:
+            return "eval";
+        case 2:
+            return "cheap-module-eval-source-map";
+        default:
+            return "source-map";
+    }
 }
 
 module.exports = env => {
-  // Initial configurations
-  const srcDir = join(__dirname, 'src');
-  const devDir = join(__dirname, 'app');
-  const prodDir = join(__dirname, 'dist');
-  const devPort = 9000;
-  const devtool = defineDevtool(3);
-  const stats = 1 ? { assets: true } : { colors: true, reasons: true };
-  const extensions = ['.ts', '.tsx', '.js', '.jsx', '.json'];
-  const devSassLoader = ExtractTextPlugin.extract({
-    fallback: 'style-loader',
-    use: [
-      {
-        loader: 'css-loader',
-        options: { sourceMap: true, importLoaders: 1 },
-      },
-      'sass-loader',
-    ],
-  });
-  // Typescript compiling configurations
-  const tsBundleConfig = {
-    context: srcDir,
-    entry: {
-      main: './app.ts',
-      css: './css/app.scss',
-    },
-    output: {
-      path: devDir,
-      filename: '[name]/bundle.js',
-      publicPath: '/app/main/',
-      pathinfo: true,
-    },
-    stats,
-    devtool,
-    devServer: {
-      hot: true,
-      open: true,
-      port: devPort,
-      publicPath: '/app/main/',
-      // https: true,
-      compress: true,
-      historyApiFallback: { disableDotRule: true },
-    },
-    resolve: { extensions },
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          include: srcDir,
-          use: 'awesome-typescript-loader',
+    // Typescript compiling configurations
+    const tsBundleConfig = {
+        // target: "node",
+        context: sourceDir,
+        entry: {
+            main: ["./app", "./css/app"],
+            // test: ["../test/test"]
         },
-        {
-          test: /\.scss$/,
-          include: join(srcDir, 'css'),
-          use: devSassLoader,
+        output: {
+            path: developmentDir,
+            filename: "[name]/bundle.js",
+            publicPath: "/app/",
+            pathinfo: true,
         },
-      ],
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NamedModulesPlugin(),
-      new ExtractTextPlugin({ filename: '[name]/bundle.css', allChunks: true }),
-    ],
-  };
-  // Webpack configurations
-  if (env.prod) {
-    delete tsBundleConfig.devtool;
-    delete tsBundleConfig.devServer;
-    delete tsBundleConfig.output.pathinfo;
-    tsBundleConfig.output = {
-      path: prodDir,
-      filename: '[name]/bundle.js',
-      publicPath: '/dist/main/',
+        stats,
+        devtool,
+        devServer: {
+            hot: true,
+            open: true,
+            port: developmentPort,
+            publicPath: "/app/",
+            compress: true,
+            historyApiFallback: { disableDotRule: true },
+            contentBase: join(__dirname, "app"),
+            // https: true,
+        },
+        resolve: { extensions },
+        module: {
+            rules: [
+                {
+                    test: /\.tsx?$/,
+                    include: sourceDir,
+                    // exclude: /^node_modules/,
+                    use: "awesome-typescript-loader",
+                },
+                {
+                    test: /\.scss$/,
+                    include: join(sourceDir, "css"),
+                    use: devSassLoader,
+                },
+            ],
+        },
+        plugins: [
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NamedModulesPlugin(),
+            new ExtractTextPlugin({ filename: "css/bundle.css", allChunks: true }),
+            new HtmlWebpackPlugin({ title: `${pageTitle} - Dev`, filename: "index.html", template: "../index.ejs" }),
+        ],
     };
-    tsBundleConfig.stats = 'normal';
-    tsBundleConfig.plugins = [
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: '"production"',
-        },
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        filename: 'main/manifest.js',
-        minChunks: Infinity,
-      }),
-      new OptimizeCssAssetsPlugin({
-        assetNameRegExp: /\.css$/g,
-        cssProcessor: require('cssnano'),
-        cssProcessorOptions: { discardComments: { removeAll: true } },
-        canPrint: true,
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        comments: false,
-      }),
-      new ExtractTextPlugin({ filename: '[name]/bundle.css', allChunks: true }),
-    ];
-  }
-  const config = [tsBundleConfig];
-  return config;
+    // Webpack configurations
+    if (env.prod) {
+        delete tsBundleConfig.devtool;
+        delete tsBundleConfig.devServer;
+        delete tsBundleConfig.output.pathinfo;
+        tsBundleConfig.externals = [nodeExternals({ importType: "var", whitelist: [/^rxjs/, /^lodash/, /^setimmediate/] })];
+        tsBundleConfig.output = {
+            path: productionDir,
+            filename: "[name]/bundle.js",
+            publicPath: "/dist/",
+        };
+        tsBundleConfig.stats = "normal";
+        tsBundleConfig.plugins = [
+            new webpack.DefinePlugin({ "process.env": { NODE_ENV: '"production"' } }),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: "manifest",
+                filename: "main/manifest.js",
+                minChunks: Infinity,
+            }),
+            new OptimizeCssAssetsPlugin({
+                assetNameRegExp: /\.css$/g,
+                cssProcessor: require("cssnano"),
+                cssProcessorOptions: { discardComments: { removeAll: true } },
+                canPrint: true,
+            }),
+            new webpack.optimize.UglifyJsPlugin({ comments: false }),
+            new ExtractTextPlugin({ filename: "css/bundle.css", allChunks: true }),
+            new HtmlWebpackPlugin({ title: `${pageTitle}`, filename: "index.html", template: "../index.ejs" }),
+        ];
+    }
+    const config = [tsBundleConfig];
+    return config;
 };

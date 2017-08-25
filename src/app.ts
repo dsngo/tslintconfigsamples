@@ -1,3 +1,8 @@
+import { Observable } from "rxjs";
+
+const arr = [1, 2, 3, 4, 5, 6];
+const data$ = Observable.from(arr);
+
 interface NamedPerson {
     firstName: string;
     age?: number;
@@ -48,7 +53,7 @@ interface DoubleValueFunc {
 }
 
 let myDoubleFunction: DoubleValueFunc;
-myDoubleFunction = function (value1: number, value2: number) {
+myDoubleFunction = function(value1: number, value2: number) {
     return (value1 + value2) * 2;
 };
 

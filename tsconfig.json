@@ -2,21 +2,21 @@
   // "exclude": [
   //   "node_modules"
   // ],
-  // "include": [
-  //   "./src"
-  // ],
+  "include": [
+    "./src"
+  ],
   "compilerOptions":{
     "target": "es5",
 		"lib": [
-			"esnext",
+      "esnext",
 			"dom",
 			"scripthost"
     ],
-		// "module": "commonjs",
+    // "module": "commonjs", /* webpack has built-in module-loader, this option can be turned off. */
+    "moduleResolution": "node",
     "downlevelIteration": true,
     "strict": true,
     "sourceMap": true
-    // "sourceRoot": "./src",
     // "outDir": "./js" 
     // "outFile": "./app/bundle.js"
     

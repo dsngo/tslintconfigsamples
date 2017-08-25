@@ -5,18 +5,21 @@
   "author": "Daniel <daniel.dungngo@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "prewd": "rm -rf app",
-    "wd": "webpack --progress --color --env",
-    "prewp": "rm -rf dist",
-    "wp": "webpack -p --progress --color --env.prod",
+    "preb:d": "rm -rf app",
+    "b:d": "webpack --progress --color --env",
+    "preb:p": "rm -rf dist",
+    "b:p": "webpack -p --progress --color --env.prod",
     "dev": "webpack-dev-server --progress --color --env",
     "start": "lite-server",
     "lint": "tslint src/**/**.ts"
   },
   "dependencies": {
-    "lite-server": "^2.3.0"
+    "lite-server": "^2.3.0",
+    "rxjs": "^5.4.3"
   },
   "devDependencies": {
+    "@types/node": "^8.0.25",
+    "@types/webpack": "^3.0.10",
     "awesome-typescript-loader": "^3.2.3",
     "css-loader": "^0.28.5",
     "extract-text-webpack-plugin": "^3.0.0",
@@ -29,6 +32,7 @@
     "tslint-config-airbnb": "^5.2.1",
     "typescript": "^2.4.2",
     "webpack": "^3.5.5",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-server": "^2.7.1",
+    "webpack-node-externals": "^1.6.0"
   }
 }

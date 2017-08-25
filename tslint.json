@@ -2,6 +2,9 @@
     "extends": "tslint-config-airbnb",
     "rules": {
         "quotemark": [true, "double", "jsx-double", "avoid-template"],
-        "ter-indent": [{ "SwitchCase": true }, true, 4]
+        "max-line-length": [true, 160],
+        "no-var-keyword": false,
+        "ter-indent": [{ "SwitchCase": true }, true, 4],
+        "ter-arrow-parens": false
     }
 }
